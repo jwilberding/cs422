@@ -10,14 +10,23 @@ data Attribute = Real AttributeName
                  deriving (Show)
 type Attributes = [Attribute]
 
+updateValues attributes values new_values count =
+    zipWith someFunc a21
+
 makeTupleList values =
-    let (Right [r]) = parse arffFileRows "(unknown)" (values++"\n")
+    let (Right [r]) = parse arffTuple "(unknown)" values
     in r
 
 constructAttributeList attributes =
     map (\x -> if x!!1 == "REAL"
                then (Real (x!!0))
-               else (TupleValues ((x!!0), (makeTupleList (reverse (drop 1 (reverse (drop 1 (x!!1))))))))) attributes
+               else (TupleValues ((x!!0), (makeTupleList (x!!1))))) attributes
+
+arffTuple = endBy tuple (char '}')
+tuple = 
+    do char '{'
+       sepBy tuple_cell (char ',')
+tuple_cell = quotedCell <|> many (noneOf ",\n\r}")
 
 arffFileAttributes = endBy attribute eol
 attribute = 
@@ -29,7 +38,7 @@ attr_cell = quotedCell <|> many (noneOf " \t\n\r")
 
 arffFileRows = endBy row eol  
 row = sepBy cell (char ',')
-cell = quotedCell <|> many (noneOf ",\n\r")
+cell = quotedCell <|> many (noneOf ",\n\r}")
                       
 quotedCell = 
     do char '"'
@@ -62,12 +71,12 @@ getNewValues inh list other attributes new_values = do
     ineof <- hIsEOF inh
     if ineof
             then 
-                -- update new values lits
+                -- update new values list
                 return (parseARFFRows list)
             else 
               if length list == 1000
               then do
-                -- update new values lits 
+                -- update new values list 
                 let list' = parseARFFRows list
                 getNewValues inh [] list' attributes (updateValues list' attributes new_values)
               else do                     

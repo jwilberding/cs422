@@ -1,8 +1,3 @@
-module CSVParser
-    (
-     parseCSV
-    ) where
-
 import Text.ParserCombinators.Parsec
         
 csvFile = endBy line eol
