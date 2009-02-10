@@ -10,8 +10,12 @@ data Attribute = Real AttributeName
                  deriving (Show)
 type Attributes = [Attribute]
 
-updateValues attributes values new_values count =
-    zipWith someFunc a21
+-- example 
+-- attriubtes: [(Real name), TupleValues (name, ["hello", "hello2"])]
+-- values: [["5", "hello"], ["6", "hello"]]
+-- new_values: []
+updateValues attributes values new_values =
+    -- map over new_values 
 
 makeTupleList values =
     let (Right [r]) = parse arffTuple "(unknown)" values
