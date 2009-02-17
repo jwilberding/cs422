@@ -21,6 +21,9 @@
 %% Income - {<=50K.,>50K.}
 
 
+%% TODO: Parse 1000 lines at a time, and use pmap to process into tuples
+
+
 %% Loads CSV file in arff format and returns list of tuples, 1 for each entry
 load_csv(F) ->
   io:format("Loading: ~s~n", [F]),
