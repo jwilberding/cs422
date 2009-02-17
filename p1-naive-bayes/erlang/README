@@ -1,1 +1,7 @@
-ERLANG WILL BEAT HASKELL!!
+To Parse:
+
+$ erl
+> c(csv_parser).                               
+{ok,csv_parser}
+> csv_parser:load_csv("../../data/adult.arff").
+
