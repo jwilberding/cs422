@@ -26,7 +26,7 @@
 
 %% Loads CSV file in arff format and returns list of tuples, 1 for each entry
 load_csv(F) ->
-  io:format("Loading: ~s~n", [F]),
+  %%io:format("Loading: ~s~n", [F]),
   load_file(F).
 
  
@@ -55,7 +55,7 @@ for_each_line(Device, Accum, Count) ->
 
   
 parse_line(L) ->
-  Tokens = string:tokens(L, ", "),
+  Tokens = string:tokens(L, ", $\n"),
   %io:format("Tokens: ~w~n", [Tokens]),
   %io:format("Age: ~w~n", [list_to_integer(lists:nth(1,Tokens))]),
   Age = check_undef_int(lists:nth(1,Tokens)),

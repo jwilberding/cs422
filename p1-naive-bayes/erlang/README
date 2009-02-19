@@ -5,3 +5,4 @@ $ erl
 {ok,csv_parser}
 > csv_parser:load_csv("../../data/adult.arff").
 
+p1:go("../../data/adult.arff").
